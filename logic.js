@@ -1,5 +1,6 @@
 const screen = document.querySelector('#screen');
 const clearButton = document.querySelector('#clear-button');
+const backspaceButton = document.querySelector('#backspace-button');
 const divideButton = document.querySelector('#divide-button');
 const multiplyButton = document.querySelector('#multiply-button');
 const subtractButton = document.querySelector('#subtract-button');
@@ -18,22 +19,23 @@ const eightButton = document.querySelector('#eight-button');
 const nineButton = document.querySelector('#nine-button');
 
 clearButton.addEventListener("click", clearButtonPressed);
-divideButton.addEventListener("click", divideButtonPressed)
-multiplyButton.addEventListener("click", multiplyButtonPressed)
-subtractButton.addEventListener("click", subtractButtonPressed)
-addButton.addEventListener("click", addButtonPressed)
-equalsButton.addEventListener("click", equalsButtonPressed)
-dotButton.addEventListener("click", dotButtonPressed)
-zeroButton.addEventListener("click", zeroButtonPressed)
-oneButton.addEventListener("click", oneButtonPressed)
-twoButton.addEventListener("click", twoButtonPressed)
-threeButton.addEventListener("click", threeButtonPressed)
-fourButton.addEventListener("click", fourButtonPressed)
-fiveButton.addEventListener("click", fiveButtonPressed)
-sixButton.addEventListener("click", sixButtonPressed)
-sevenButton.addEventListener("click", sevenButtonPressed)
-eightButton.addEventListener("click", eightButtonPressed)
-nineButton.addEventListener("click", nineButtonPressed)
+backspaceButton.addEventListener("click", backspaceButtonPressed);
+divideButton.addEventListener("click", divideButtonPressed);
+multiplyButton.addEventListener("click", multiplyButtonPressed);
+subtractButton.addEventListener("click", subtractButtonPressed);
+addButton.addEventListener("click", addButtonPressed);
+equalsButton.addEventListener("click", equalsButtonPressed);
+dotButton.addEventListener("click", dotButtonPressed);
+zeroButton.addEventListener("click", zeroButtonPressed);
+oneButton.addEventListener("click", oneButtonPressed);
+twoButton.addEventListener("click", twoButtonPressed);
+threeButton.addEventListener("click", threeButtonPressed);
+fourButton.addEventListener("click", fourButtonPressed);
+fiveButton.addEventListener("click", fiveButtonPressed);
+sixButton.addEventListener("click", sixButtonPressed);
+sevenButton.addEventListener("click", sevenButtonPressed);
+eightButton.addEventListener("click", eightButtonPressed);
+nineButton.addEventListener("click", nineButtonPressed);
 
 let firstNum = "";
 let secondNum = "";
@@ -58,16 +60,16 @@ function divide(a, b) {
 function operate(a, b, operator) {
     switch (operator) {
         case "add":
-            return add(a, b)
+            return add(a, b);
     
         case "subtract":
-            return subtract(a, b)
+            return subtract(a, b);
 
         case "multiply":
-            return multiply(a, b)
+            return multiply(a, b);
 
         case "divide":
-            return divide(a, b)
+            return divide(a, b);
     }
 }
 
@@ -92,10 +94,6 @@ function updateDisplay(num) {
     } else {
         screen.textContent = firstNum;
     }
-
-    console.log(`firstNum: ${firstNum}`);
-    console.log(`secondNum: ${secondNum}`);
-    console.log(`operator: ${operator}`);
 }
 
 function handleOperator(sign) {
@@ -109,6 +107,16 @@ function clearButtonPressed() {
     secondNum = "";
     operator = "";
     updateDisplay();
+}
+
+function backspaceButtonPressed() {
+    if (!operator) {
+        firstNum = firstNum.slice(0, -1);
+    } else {
+        secondNum = secondNum.slice(0, -1);
+        if (secondNum === "") secondNum = "0";
+    }
+    updateDisplay()
 }
 
 function divideButtonPressed() {
@@ -129,9 +137,10 @@ function addButtonPressed() {
 
 function equalsButtonPressed() {
     if (secondNum === "0" && operator === "divide") {
-        clearButtonPressed()
-        screen.textContent = "You broke me :("
+        clearButtonPressed();
+        screen.textContent = "You broke me :(";
     }
+    
     if (firstNum && secondNum && operator) {
         const result = operate(Number(firstNum), Number(secondNum), operator);
         firstNum = String(result);
@@ -164,7 +173,6 @@ function threeButtonPressed() {
 }
 
 function fourButtonPressed() {
-    console.log("four button")
     updateDisplay("4");
 }
 

@@ -20,11 +20,7 @@ button {
     display: flex;
 }
 
-#clear-button {
-    flex: 3;
-}
-
-#zero-button {
+#clear-button, #zero-button {
     flex: 2;
 }
 
