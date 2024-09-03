@@ -20,8 +20,12 @@ button {
     display: flex;
 }
 
-#clear-button, #zero-button {
+#clear-button {
     flex: 3;
+}
+
+#zero-button {
+    flex: 2;
 }
 
 #screen {

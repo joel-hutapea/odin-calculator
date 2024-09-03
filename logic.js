@@ -5,6 +5,7 @@ const multiplyButton = document.querySelector('#multiply-button');
 const subtractButton = document.querySelector('#subtract-button');
 const addButton = document.querySelector('#add-button');
 const equalsButton = document.querySelector('#equals-button');
+const dotButton = document.querySelector('#dot-button');
 const zeroButton = document.querySelector('#zero-button');
 const oneButton = document.querySelector('#one-button');
 const twoButton = document.querySelector('#two-button');
@@ -22,6 +23,7 @@ multiplyButton.addEventListener("click", multiplyButtonPressed)
 subtractButton.addEventListener("click", subtractButtonPressed)
 addButton.addEventListener("click", addButtonPressed)
 equalsButton.addEventListener("click", equalsButtonPressed)
+dotButton.addEventListener("click", dotButtonPressed)
 zeroButton.addEventListener("click", zeroButtonPressed)
 oneButton.addEventListener("click", oneButtonPressed)
 twoButton.addEventListener("click", twoButtonPressed)
@@ -72,10 +74,14 @@ function operate(a, b, operator) {
 function updateDisplay(num) {
     if (num) {
         if (!operator) {
-            firstNum += num;
+            if (!(num === "." && firstNum.includes("."))) {
+                firstNum += num;
+            }
         } else {
             if (secondNum === "0") secondNum = ""
-            secondNum += num;
+            if (!(num === "." && secondNum.includes("."))) {
+                secondNum += num;
+            }
         }
     }
 
@@ -133,6 +139,10 @@ function equalsButtonPressed() {
         secondNum = "";
         updateDisplay();
     }
+}
+
+function dotButtonPressed() {
+    updateDisplay(".");
 }
 
 function zeroButtonPressed() {
